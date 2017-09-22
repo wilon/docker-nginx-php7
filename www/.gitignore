@@ -1,0 +1,5 @@
+*
+!.gitignore
+!index.php
+!phpinfo.php
+!docker-nginx-php7.com

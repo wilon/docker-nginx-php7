@@ -1,0 +1,3 @@
+*
+!.gitignore
+!docker-nginx-php7.com.conf
