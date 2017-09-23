@@ -2,6 +2,11 @@
 
 Quick build a nginx-php7 environment, Docker image from https://github.com/skiy-dockerfile/nginx-php7.
 
+```
+NGINX_VERSION 1.11.6
+PHP_VERSION 7.1.0
+```
+
 ## Install
 
 ```shell
