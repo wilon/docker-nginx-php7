@@ -48,7 +48,10 @@ function _check_port() {
 function _docker_run_result() {
     if [[ $(_docker_check_alive_container $CONTAINER_NAME) -gt 0 ]]; then
         echo "CONTAINER_NAME=$CONTAINER_NAME" > $WORKSPACE/.env
+        echo "PORT=$PORT" >> $WORKSPACE/.env
         printf "INFO: ${GREEN}docker run $CONTAINER_NAME success!${NORMAL}\n"
+        IPADDR=$(/sbin/ifconfig -a | grep inet | grep -v 127.0.0.1 | grep -v inet6 | awk '{print $2}' | tr -d "addr:")
+        printf "Browser : ${GREEN}http://${IPADDR}:${PORT}/${NORMAL}\n"
         exit
     else
         printf "INFO: ${RED}docker run $CONTAINER_NAME faild!${NORMAL}\n"
