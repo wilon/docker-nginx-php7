@@ -50,8 +50,8 @@ function _docker_run_result() {
         echo "CONTAINER_NAME=$CONTAINER_NAME" > $WORKSPACE/.env
         echo "PORT=$PORT" >> $WORKSPACE/.env
         printf "INFO: ${GREEN}docker run $CONTAINER_NAME success!${NORMAL}\n"
-        IPADDR=$(/sbin/ifconfig -a | grep inet | grep -v 127.0.0.1 | grep -v inet6 | awk '{print $2}' | tr -d "addr:")
-        printf "Browser : ${GREEN}http://${IPADDR}:${PORT}/${NORMAL}\n"
+        IPADDR=$(/sbin/ifconfig -a | grep inet | grep -v inet6 | awk -v port="$PORT" '{print "http://"$2":"port}')
+        printf "Browser : ${GREEN}http://localhost:${PORT}\n${IPADDR}${NORMAL}\n"
         exit
     else
         printf "INFO: ${RED}docker run $CONTAINER_NAME faild!${NORMAL}\n"
@@ -88,8 +88,8 @@ COMMAND="docker run --restart=always --name $CONTAINER_NAME \
 -v $WORKSPACE/www:/data/www \
 -v $WORKSPACE/ssl:/usr/local/nginx/conf/ssl \
 -v $WORKSPACE/vhost:/usr/local/nginx/conf/vhost \
--v $WORKSPACE/phpext_ini:/usr/local/php/etc/php.d \
--v $WORKSPACE/phpext_file:/data/phpext \
+-v $WORKSPACE/phpextini:/data/phpextini \
+-v $WORKSPACE/phpextfile:/data/phpextfile \
 -itd $IMAGE"
 printf "RUN: ${RED}$COMMAND${NORMAL}\n"
 $COMMAND
