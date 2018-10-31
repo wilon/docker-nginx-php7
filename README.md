@@ -16,10 +16,10 @@ You can repeat the above steps to create more enviroment.
 
 ```
 ./docker-nginx-php7
-   |-- phpextfile    # PHP enviroment extension file .so
+   |-- phpextfile    # PHP enviroment extension files
    |-- phpextini     # PHP enviroment extension config .ini
+   |-- phpextbash    # PHP extension install bash.
    |-- ssl            # Certificate file
-   |-- storage        # Some file about this project.
    |-- vhost          # Nginx enviroment vhost dir.
    |-- wwww           # Nginx enviroment default workspace.
 ```
@@ -36,12 +36,19 @@ Mapping the Docker Container.
 
 ## Add php extension
 
-Increasing... Wellcom to `Pull requests`.
+Increasing... Wellcom to `Pull Requests`.
 
 #### ldap
 ```shell
 cd YOURPROJECT/docker-nginx-php7/
-cp -rf extbash/extension_ldap.sh phpextfile/extension.sh
+cp -rf phpextbash/extension_ldap.sh phpextfile/extension.sh
 ./bootstrap.sh
-# Then open http://127.0.0.1:$PORT/phpinfo.php
+```
+
+
+#### oci8
+```shell
+cd YOURPROJECT/docker-nginx-php7/
+cp -rf phpextbash/extension_oci8.sh phpextfile/extension.sh
+./bootstrap.sh
 ```

@@ -41,7 +41,7 @@ function _md5_ext() {
     echo $(date +"\%Y-\%m-\%d \%H:\%M:\%S" | md5sum | cut -b 1-5)
 }
 function _check_port() {
-    m=$(netstat -nlt | grep ${1} | wc -l)
+    m=$(netstat -nlat | grep ${1} | wc -l)
     n=$(docker ps -a | grep ${1} | wc -l)
     echo $(( $m + $n ))
 }
