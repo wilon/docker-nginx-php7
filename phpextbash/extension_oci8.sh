@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #
-# instantclient 12
+# instantclient 12.1
 #
 
 PHPEXT_DIR="/data/phpextfile"
@@ -12,12 +12,13 @@ fi
 
 # Add oracle instantclient
 yum -y install libaio
-rpm -Uvh $PHPEXT_DIR/oracle/oracle-instantclient12.1-basic-12.1.0.2.0-1.x86_64.rpm
-rpm -Uvh $PHPEXT_DIR/oracle/oracle-instantclient12.1-devel-12.1.0.2.0-1.x86_64.rpm
-rpm -Uvh $PHPEXT_DIR/oracle/oracle-instantclient12.1-sqlplus-12.1.0.2.0-1.x86_64.rpm
+wget -o oracle-instantclient12.1-basic-12.1.0.2.0-1.x86_64.rpm http://ftp.riken.jp/Linux/cern/centos/7/cernonly/x86_64/Packages/oracle-instantclient12.1-basic-12.1.0.2.0-1.x86_64.rpm
+wget -o oracle-instantclient12.1-devel-12.1.0.2.0-1.x86_64.rpm http://ftp.riken.jp/Linux/cern/centos/7/cernonly/x86_64/Packages/oracle-instantclient12.1-devel-12.1.0.2.0-1.x86_64.rpm
+wget -o oracle-instantclient12.1-sqlplus-12.1.0.2.0-1.x86_64.rpm http://ftp.riken.jp/Linux/cern/centos/7/cernonly/x86_64/Packages/oracle-instantclient12.1-sqlplus-12.1.0.2.0-1.x86_64.rpm
+rpm -Uvh *.rpm
 ln -s /usr/lib/oracle/12.1/client64/bin/sqlplus /usr/local/bin/sqlplus
 ln -s /usr/lib/oracle/12.1/client64/bin/genezi /usr/local/bin/genezi
-echo "/usr/lib/oracle/12.1/client64/lib" >/etc/ld.so.conf.d/oracle.conf
+echo "/usr/lib/oracle/12.1/client64/lib" > /etc/ld.so.conf.d/oracle.conf
 ldconfig
 
 
@@ -29,3 +30,7 @@ cd /home/extension/oci8
 ./configure --with-php-config=/usr/local/php/bin/php-config --with-oci8=instantclient,/usr/lib/oracle/12.1/client64/lib
 make && make install
 echo "extension=oci8.so" > $PHPEXT_DIR/../phpextini/oci8.ini
+
+
+
+

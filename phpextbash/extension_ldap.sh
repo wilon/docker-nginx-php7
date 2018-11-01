@@ -17,5 +17,4 @@ cd /home/extension/ldap && \
 /usr/local/php/bin/phpize && \
 ./configure --with-php-config=/usr/local/php/bin/php-config && \
 make && make install && \
-cp -rf modules/ldap.so $PHPEXT_DIR
 echo "extension=ldap.so" > $PHPEXT_DIR/../phpextini/ldap.ini
