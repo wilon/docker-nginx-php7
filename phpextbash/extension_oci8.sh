@@ -11,15 +11,18 @@ if [ ! -d $PHPEXT_DIR/php-$PHP_VERSION ]; then
 fi
 
 # Add oracle instantclient
-yum -y install libaio
-wget -o oracle-instantclient12.1-basic-12.1.0.2.0-1.x86_64.rpm http://ftp.riken.jp/Linux/cern/centos/7/cernonly/x86_64/Packages/oracle-instantclient12.1-basic-12.1.0.2.0-1.x86_64.rpm
-wget -o oracle-instantclient12.1-devel-12.1.0.2.0-1.x86_64.rpm http://ftp.riken.jp/Linux/cern/centos/7/cernonly/x86_64/Packages/oracle-instantclient12.1-devel-12.1.0.2.0-1.x86_64.rpm
-wget -o oracle-instantclient12.1-sqlplus-12.1.0.2.0-1.x86_64.rpm http://ftp.riken.jp/Linux/cern/centos/7/cernonly/x86_64/Packages/oracle-instantclient12.1-sqlplus-12.1.0.2.0-1.x86_64.rpm
+yum -y install libaio wget
+
+wget -O oracle-instantclient12.1-basic-12.1.0.2.0-1.x86_64.rpm https://raw.githubusercontent.com/yeuk/phundamental-oic/master/linux/64bit/oracle-instantclient12.1-basic-12.1.0.2.0-1.x86_64.rpm
+wget -O oracle-instantclient12.1-devel-12.1.0.2.0-1.x86_64.rpm https://raw.githubusercontent.com/yeuk/phundamental-oic/master/linux/64bit/oracle-instantclient12.1-devel-12.1.0.2.0-1.x86_64.rpm
+wget -O oracle-instantclient12.1-sqlplus-12.1.0.2.0-1.x86_64.rpm https://raw.githubusercontent.com/yeuk/phundamental-oic/master/linux/64bit/oracle-instantclient12.1-sqlplus-12.1.0.2.0-1.x86_64.rpm
 rpm -Uvh *.rpm
-ln -s /usr/lib/oracle/12.1/client64/bin/sqlplus /usr/local/bin/sqlplus
-ln -s /usr/lib/oracle/12.1/client64/bin/genezi /usr/local/bin/genezi
+ln -sf /usr/lib/oracle/12.1/client64/bin/sqlplus /usr/local/bin/sqlplus
+ln -sf /usr/lib/oracle/12.1/client64/bin/genezi /usr/local/bin/genezi
 echo "/usr/lib/oracle/12.1/client64/lib" > /etc/ld.so.conf.d/oracle.conf
 ldconfig
+
+yum -y remove wget
 
 
 # Add oci8
